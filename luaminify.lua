@@ -3208,12 +3208,16 @@ local global_scope, root_scope = AddVariableInfo(ast)
 
 local min = {}
 
-function min:minify(ast, global_scope, root_scope)
-	return MinifyVariables(global_scope, root_scope)
+function min:minify(script)
+	local ast = CreateLuaParser(script)
+	local global, root = AddVariableInfo(ast)
+	return MinifyVariables(global, root)
 end
 
-function min:beautify(ast, global_scope, root_scope)
-	return BeautifyVariables(global_scope, root_scope)
+function min:beautify(script)
+	local ast = CreateLuaParser(script)
+	local global, root = AddVariableInfo(ast)
+	return BeautifyVariables(global, root)
 end
 
 return min
